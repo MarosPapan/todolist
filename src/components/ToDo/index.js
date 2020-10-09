@@ -16,6 +16,7 @@ import {
     initDeleteTaskAction,
     openModalAction,
     closeModalAction,
+    initCompleteTaskAction,
 } from './actions'
 
 import './style.scss';
@@ -31,6 +32,7 @@ const mapStateToProps = (state) => {
         delete: _.get(state, 'delete', null),
         form: _.get(state, 'form', null),
         modal: _.get(state, 'modal', null),
+        complete: _.get(state, 'complete', {}),
     }
 }
 
@@ -43,6 +45,8 @@ const mapDispatchToProps = (dispatch) => {
         initDeleteTaskAction,
         openModalAction,
         closeModalAction,
+        initEditingAction,
+        initCompleteTaskAction,
     }, dispatch)
 }
 
@@ -52,17 +56,21 @@ const ToDo = (props) => {
 
     useEffect(() => {
         props.taskLoadsInitAction(); 
-        console.log("ToDo props", props);
     }, []);
 
     const handleForm = (e) => {
-        console.log(e.target.value);
         setForm(e.target.value);
     };
 
     const handleOnSubmit = (e) => {
-        console.log('Submitted Value: ', formState);
+        //e.preventDefault()
         props.addtodoInitAction(formState);
+    };
+
+    const handleOnEdit = (e, id) => {
+        e.preventDefault();
+        props.initEditingAction(id);
+        onCloseModal();
     };
 
     // const handleOnEdit = (task) => () => {
@@ -71,17 +79,11 @@ const ToDo = (props) => {
     // };
 
     const handleOnDelete = (task) => () => {
-        console.log("ID OF DELETING ITEM: ", task.id);
         props.initDeleteTaskAction(task.id);
     }
 
-    let detailTask ="ahoj"
-
     const onOpenModal = (task) => () => {
         props.openModalAction();
-
-        // let detailTask = _.find(props.tasks.data, (t) => {return t.id == task.id })
-        // console.log('Detail Task -> ', detailTask.title);
         props.initGetTaskAction(task.id)
     }
 
@@ -89,12 +91,19 @@ const ToDo = (props) => {
         props.closeModalAction();
     };
 
+    const taskCompleted = (task) => () => {
+        task.completed = !task.completed;
+        console.log("TASK COMPLETE: ", task.completed);
+        props.initCompleteTaskAction(task.id, task.completed);
+    }
+
     return (
         <div className="container">
             <EditComponent
                 open={props.modal.open}
                 onClose={onCloseModal}
                 initValue={props.getTask.data.title}
+                handleOnEdit={handleOnEdit}
             />
             <div id="task-container">
                 <div id="form-wrapper">
@@ -125,8 +134,12 @@ const ToDo = (props) => {
                                 {_.map(props.tasks.data, task => {
                                     return(
                                         <div key={task.id} className="task-wrapper flex-wrapper">
-                                            <div style={{flex:7}}>
-                                                <p> {task.title} </p>
+                                            <div style={{flex:7}} onClick={taskCompleted(task)}>
+                                                {task.completed == false ? (
+                                                    <p> {task.title} </p>
+                                                ) : (
+                                                    <strike> {task.title} </strike>
+                                                )}
                                             </div>
                                             <div style={{flex:1}}>
                                                 <button

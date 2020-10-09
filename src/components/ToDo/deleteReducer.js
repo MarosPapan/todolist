@@ -1,7 +1,6 @@
-import _, { get } from 'lodash';
+import _ from 'lodash';
 
 import {
-    INIT_DELETE_TASK,
     DELETE_TASK_START,
     DELETE_TASK_SUCCESS,
     DELETE_TASK_ERROR,

@@ -21,6 +21,13 @@ import {
 
     OPEN_MODAL, 
     CLOSE_MODAL,
+
+    INIT_EDITING,
+    SUCCESS_EDITING,
+    INVALID_EDITING,
+
+    INIT_COMPLETE_TASK,
+    COMPLETE_TASK_SUCCESS,
 } from './constants';
 
 
@@ -99,3 +106,28 @@ export const openModalAction = () => {
 export const closeModalAction = () => {
     return {type: CLOSE_MODAL};
 }
+
+
+//EDIT ACTIONS
+
+export const initEditingAction = (id) => {
+    return {type: INIT_EDITING, id}
+}; 
+
+export const successEditingAction = (payload) => {
+    return {type: SUCCESS_EDITING, payload}
+};
+
+export const invalidEditingAction = (error) => {
+    return {type: INVALID_EDITING, error}
+};
+
+//Complete Task Actions
+
+export const initCompleteTaskAction = (id, formData) => {
+    return {type: INIT_COMPLETE_TASK, id, formData}
+};
+
+export const completeTaskSuccessAction = (payload) => {
+    return {type: COMPLETE_TASK_SUCCESS, payload}
+};

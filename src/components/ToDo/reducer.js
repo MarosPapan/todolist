@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
 import {
-    INIT_TASKS_LOAD,
     INIT_TASKS_START_LOAD,
     INIT_TASKS_SUCCESS_LOAD,
     INIT_TASKS_ERROR_LOAD,

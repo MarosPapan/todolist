@@ -2,7 +2,6 @@ import _ from 'lodash';
 
 import { 
     INIT_EDITING,
-    START_EDITING,
     SUCCESS_EDITING,
     INVALID_EDITING,
     InitialEditingState,
@@ -11,17 +10,20 @@ import {
 export default (editState = InitialEditingState, action = {}) => {
     const type = _.get(action, 'type', null);
 
-    if(type === START_EDITING) {
+    if(type === INIT_EDITING){
         return {
             editing: true,
             posting: true,
-            posted: false, 
+            posted: false,
+            id: _.get(action, 'id', null), 
             error: null,
         }
     }
 
+
     if (type === SUCCESS_EDITING) {
         return {
+            ...editState,
             editing: false, 
             posting: false,
             posted: true, 
@@ -31,6 +33,7 @@ export default (editState = InitialEditingState, action = {}) => {
 
     if (type === INVALID_EDITING) {
         return {
+            ...editState,
             editing: false, 
             posting: false,
             posted: false, 

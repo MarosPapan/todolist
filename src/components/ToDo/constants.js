@@ -1,3 +1,4 @@
+//load tasks constants
 export const INIT_TASKS_LOAD = 'INIT_TASKS_LOAD';
 export const INIT_TASKS_START_LOAD = 'INIT_TASKS_START_LOAD';
 export const INIT_TASKS_SUCCESS_LOAD = 'INIT_TASKS_SUCCESS_LOAD';
@@ -10,14 +11,14 @@ export const InitialTaskState = {
     data: null,
 }
 
-
+//onchamge in form constants
 export const ON_CHANGE = 'ON_CHANGE';
 
 export const InitialFormState = {
     data: null,
 }
 
-
+//add task to todo constants
 export const INIT_ADD_TODO = 'INIT_ADD_TODO'; 
 export const INIT_START_ADD_TODO = 'INIT_START_ADD_TODO'; 
 export const INIT_SUCCESS_ADD_TODO = 'INIT_SUCCUESS_ADD_TODO'; 
@@ -30,6 +31,8 @@ export const InitialAddToDoState = {
     error: null,
 }
 
+
+//get task constants
 export const INIT_GET_TASK = "INIT_GET_TASK";
 export const GET_TASK_SUCCESS = "GET_TASK_SUCCESS";
 export const InitialGetTaskState = {
@@ -38,6 +41,7 @@ export const InitialGetTaskState = {
     data: {},
 }
 
+//delete constants
 export const INIT_DELETE_TASK = "INIT_DELETE_TASK";
 export const DELETE_TASK_START = "DELETE_TASK_START";
 export const DELETE_TASK_SUCCESS = "DELETE_TASK_SUCCESS";
@@ -50,8 +54,28 @@ export const initialDeleteState = {
 }
 
 
+
+//modal constants
 export const OPEN_MODAL = "OPEN_MODAL";
 export const CLOSE_MODAL = "CLOSE_MODAL"; 
 export const initModalState = {
     open: false,
+}
+
+//edit constants
+export const INIT_EDITING = "INIT_EDITING";
+export const SUCCESS_EDITING = "SUCCESS_EDITING"; 
+export const INVALID_EDITING = "INVALID_EDITING";
+
+export const InitialEditingState = {
+    editing: true,
+}
+
+//Complete task constants
+export const INIT_COMPLETE_TASK = "INIT_COMPLETE_TASK";
+export const COMPLETE_TASK_SUCCESS = "COMPLETE_TASK_SUCCESS";
+export const InitialCompleteTaskState = {
+    complete: false,
+    id: null,
+    data: {},
 }
